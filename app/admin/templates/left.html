@@ -1,0 +1,56 @@
+<!-- 树状菜单 -->
+<!--
+<h1 class="item1">XX管理</h1>
+<div class="block">
+    <ul>
+        <li><a href="{=$smarty.const.URL_ROOT=}index.php?c=xx&a=xx">xx管理</a></li>
+    </ul>
+</div>
+-->
+<div id="menutree" class="ui-menutree">
+<!--
+    <h1 class="menu-itemHeader menu-extension">测试管理</h1>
+    <div class="menu-itemCont">
+        <ul>
+            <li><a href="{=createUrl controller='test' action='view'=}">测试列表</a></li>
+        </ul>
+    </div>
+-->
+    <h1 class="menu-itemHeader menu-extension">收藏管理</h1>
+<div class="menu-itemCont">
+    <ul>
+        <li><a href="{=createUrl controller='collect' action='view'=}">收藏列表</a></li>
+    </ul>
+</div>
+<h1 class="menu-itemHeader menu-extension">评论管理</h1>
+<div class="menu-itemCont">
+    <ul>
+        <li><a href="{=createUrl controller='comment' action='view'=}">评论列表</a></li>
+    </ul>
+</div>
+<h1 class="menu-itemHeader menu-extension">图片管理</h1>
+<div class="menu-itemCont">
+    <ul>
+        <li><a href="{=createUrl controller='picture' action='view'=}">图片列表</a></li>
+    </ul>
+</div>
+<h1 class="menu-itemHeader menu-extension">标签管理</h1>
+<div class="menu-itemCont">
+    <ul>
+        <li><a href="{=createUrl controller='tags' action='view'=}">标签列表</a></li>
+    </ul>
+</div>
+<h1 class="menu-itemHeader menu-extension">用户管理</h1>
+<div class="menu-itemCont">
+    <ul>
+        <li><a href="{=createUrl controller='userinfo' action='view'=}">用户列表</a></li>
+    </ul>
+</div>
+<h1 class="menu-itemHeader menu-extension">相册管理</h1>
+<div class="menu-itemCont">
+    <ul>
+        <li><a href="{=createUrl controller='album' action='view'=}">相册列表</a></li>
+    </ul>
+</div>
+{=*后台菜单*=}
+</div>

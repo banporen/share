@@ -1,0 +1,57 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+    <meta property="wb:webmaster" content="bfa312168408a5bc" /> 
+    <link href="/images/icon/favicon.ico" type="image/x-icon" rel="shortcut icon"> 
+    <title>OICU社区成员--OICU.ME 优美图片分享社区</title>	
+    <meta name="description" content="高品质灵感、清新、时尚、设计、插画、素描类优美图片分享社区。专业为用户提供精美的灵感、插画、摄影、抓拍、小清新图片素材，是目前最广泛的图片收藏、分享社区。目标是为用户提供更好的使用体验与生活享受。" />
+      <meta name="keywords" content="优美图片分享 清新图片、微博头像，灵感图片、时尚图片、创意图片、图片设计、艺术图片、摄影照片、平面设计、精品图片、精美图片、唯美图片" />
+ 
+    <link rel="stylesheet" rev="stylesheet" href="/css/common.css" type="text/css" media="all" />  
+    <script type="text/javascript" src="/js/jquery.min.js"></script>         
+</head>
+<body>
+    {=include file='include/menu.html'=} 
+    <div class="blank"></div>
+    <div class="main">  
+        <div class="left" style="height:600px;">  
+             <div style="border-bottom:1px solid #EEE;width:510px;margin:0 auto;padding-bottom:10px;margin-top:20px;text-align:left;">
+                <h2 style="font-family:Microsoft YaHei;color:#333;font-weight:bold;font-size:17px;">活跃度排行</h2>
+             </div>
+             <div class="mbox">
+                 <ul class="minfo">
+                      {=foreach from=$activeUsers item=item=}
+                      <li>
+                            <a href="/home/{=$item.id=}" title="{=$item.username=}"><img width=50 height=50 src="{=$item.avartar=}"></a>
+                            <!--<div>{=$item.username=}</div>-->
+                      </li>
+                      {=/foreach=}
+                      <div style="clear:both;"></div>
+                 </ul>
+             </div>        
+             <div style="border-bottom:1px solid #EEE;width:510px;margin:0 auto;padding-bottom:10px;margin-top:20px;text-align:left;">
+                <h2 style="font-family:Microsoft YaHei;color:#333;font-weight:bold;font-size:17px;">新人排行</h2>
+             </div>
+             <div class="mbox">
+                 <ul class="minfo">
+                      {=foreach from=$newUsers item=item=}
+                      <li >
+                      <a href="/home/{=$item.id=}" title="{=$item.username=}"><img width=50 height=50 src="{=$item.avartar=}"></a>
+                            <!--<div>{=$item.username=}</div>-->
+                      </li>
+                      {=/foreach=}
+                      <div style="clear:both;"></div>
+                 </ul>
+             </div> 
+        </div>
+        <div class="right" >
+             {=include file='include/self.html'=} 
+             {=include file='include/push.html'=} 
+             {=include file='include/users.html'=}   
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {=include file='include/foot.html'=} 
+</body>                   
+</html>         

@@ -1,0 +1,11 @@
+<div class="hearters"> 
+      <div style="width:233px;height:15px;margin:5px auto;">谁在收藏</div>
+      {=foreach from=$userlist item=item=}
+      <li>
+          <a target="_blank" href="/home/{=$item.id=}">
+              <img width=50 height=50 src="{=$item.avartar=}" title="{=$item.username=}" style="position: relative;">
+          </a>
+      </li>
+      {=/foreach=}
+    <div style="clear:both;"></div>
+</div>

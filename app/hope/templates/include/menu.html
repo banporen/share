@@ -1,0 +1,88 @@
+<div class="topbar fixed"> 
+      <div class="topbar-inner">
+          <ul class="index" style="float:left;">
+                <li class="black">      
+                      <a class="home" href="/"  title="主页">
+                          <div class="new-wrapper">
+                              <div class="nav-home"></div>
+                              <div class="nav-new"></div>
+                          </div>
+                          <div class="text">主页</div>
+                          <div style="clear:both;"></div>
+                      </a>   
+                </li>
+                <li>
+                    <a class="people" href="/comment"  title="动态">
+                        <div class="new-wrapper">
+                            <div class="nav-people"></div>
+                            <div></div>
+                        </div>
+                        <div class="text">动态</div>
+                         <div style="clear:both;"></div>
+                    </a>
+                </li>
+                <li>
+                    <a class="topics" href="/userinfo"  title="发现">
+                        <div class="new-wrapper">
+                            <div class="nav-topics"></div>
+                            <div></div>
+                        </div>
+                        <div class="text">发现</div>
+                         <div style="clear:both;"></div>
+                    </a>
+                </li>
+                {=if $userinfo=}
+                <li>
+                    <a class="profile" href="/home/{=$userinfo.id=}"  title="我">
+                        <div class="new-wrapper">
+                              <div class="nav-profile"></div>
+                              <div></div>
+                        </div>
+                        <div class="text">我</div>
+                         <div style="clear:both;"></div>
+                    </a>
+                </li>
+                {=/if=}
+                <div style="clear:both;"></div>
+          </ul>
+          <ul class="index" style="float:right;">
+                <li>
+                    <a class="infoset">
+                        <div class="new-wrapper">
+                            <div class="nav-infoset"></div>
+                            <div class="caret"></div>
+                        </div>        
+                        <div class="text" style="text-align:center;">设置</div> 
+                    </a>
+                </li>
+                <li class="topbar-divider" style="width:2px;"></li>
+                <li>
+                    <a class="publish" href="{=if $userinfo=}/upload{=else=}/userinfo/login{=/if=}">
+                        <div class="new-wrapper">
+                            <div class="nav-publish"></div>
+                            <div></div>
+                        </div>        
+                        <div class="text">发布</div>
+                    </a>
+                </li>
+          </ul>
+          <ul id="dropdown-menu" class="dropdown-menu">
+              {=if $userinfo=}
+              <li><a href="/userinfo/password">密码设置</a></li>
+              <li><a href="/userinfo/avartar">头像</a></li>
+              <li><a href="/userinfo/infoset">账号设置</a></li>
+              {=/if=}
+              <li><a href="/userinfo/regist">立即注册</a></li> 
+              <li><a href="/userinfo/login">登陆</a></li>
+              <li><a href="/?s=userinfo&a=logout">退出</a></li>
+          </ul>
+          <div style="clear:both;"></div>
+      </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.infoset').click(function(){
+                $('.dropdown-menu').toggle();    
+        }); 
+    }); 
+</script>

@@ -1,0 +1,94 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+    <meta property="wb:webmaster" content="bfa312168408a5bc" /> 
+    <link href="/images/icon/favicon.ico" type="image/x-icon" rel="shortcut icon"> 
+    <title>登陆--收录极品美女</title>	
+    <meta name="description" content="高品质灵感、清新、时尚、设计、插画、素描类优美图片分享社区。专业为用户提供精美的灵感、插画、摄影、抓拍、小清新图片素材，是目前最广泛的图片收藏、分享社区。目标是为用户提供更好的使用体验与生活享受。" />
+      <meta name="keywords" content="优美图片分享 清新图片、微博头像，灵感图片、时尚图片、创意图片、图片设计、艺术图片、摄影照片、平面设计、精品图片、精美图片、唯美图片" />
+ 
+    <link rel="stylesheet" rev="stylesheet" href="/css/common.css" type="text/css" media="all" />  
+    <script type="text/javascript" src="/js/jquery.min.js"></script>         
+</head>
+<body>
+    {=include file='include/menu.html'=} 
+    <div class="blank"></div>
+    <div class="main">  
+        <div class="left" style="height:600px;"> 
+            <div style="border-bottom:1px solid #EEE;width:510px;margin:0 auto;padding-bottom:10px;margin-top:20px;text-align:left;">
+                <h2 style="font-family:Microsoft YaHei;color:#333;font-weight:bold;font-size:17px;">登陆</h2>
+            </div>
+            <div class="login-box">
+                  <form action="/?s=userinfo&a=doLogin&ref={=$ref=}" class="new_user"  method="post" onSubmit="javascript:return check(this);">
+                       <table><tbody>
+                               
+                           <tr>
+                               <td>邮箱</td>
+                               <td><input name="email" size="30" value="" type="text">&nbsp;&nbsp;<span id="email"></span></td>
+                           </tr>
+                           <tr>
+                               <td>密码</td>
+                               <td><input  name="password" size="30" type="password">&nbsp;&nbsp;<span id="password"></span></td>
+                           </tr>
+                           <tr>
+                               <td><input type="hidden" name="reffer" value="{=$reffer=}"></td>
+                               <td>
+                                   <input class="lbtn"  name="commit" value="" type="submit"> 
+                                   <a href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;忘记密码？</a>
+                               </td>
+                           </tr>
+                       </tbody></table>
+                  </form>            
+             </div>        
+        </div>
+        <div class="right" >
+             {=include file='include/self.html'=} 
+             {=include file='include/push.html'=} 
+             {=include file='include/users.html'=}   
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="foot"></div>
+</body>                   
+</html>         
+<script type="text/javascript">
+        function check(form){
+            if(!form.email.value){
+                form.email.focus(); 
+                $('#email').html('对不起，邮箱不能为空。');
+                $('input[name=email]').css({'border-color':'pink'});
+                return false;
+            }else if(!form.password.value){
+                form.password.focus(); 
+                $('#password').html('对不起，密码不能为空.');
+                 $('#email').html('√');
+                $('input[name=email]').css({'border-color':'#DDD'});    
+                $('input[name=password]').css({'border-color':'pink'});
+                return false;
+            }else{
+                var CallBackFlag=false;
+                var email=form.email.value;
+                var password=form.password.value;
+                $.ajax({
+                    type:"POST",
+                    url:"/?s=userinfo&a=loginCheck",
+                    data:{email:email,password:password},
+                    async:false,
+                    cache:false,
+                    success:function(result){
+                        obj=eval('('+result+')');
+                        if(obj=='Y'){
+                             $('#password').html('√'); 
+                            CallBackFlag=true;
+                        }else if(obj=='M'){
+                             $('#password').html('对不起，请您先注册。'); 
+                        }else{
+                             $('#password').html('对不起，邮箱或密码错误。');
+                        }                       
+                    }
+                });
+                return CallBackFlag;
+            }
+        }
+    </script>

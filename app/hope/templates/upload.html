@@ -1,0 +1,138 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+    <meta property="wb:webmaster" content="bfa312168408a5bc" /> 
+    <link href="/images/icon/favicon.ico" type="image/x-icon" rel="shortcut icon"> 
+    <title>发布图片--OICU.ME 优美图片分享社区</title>	
+    <meta name="description" content="高品质灵感、清新、时尚、设计、插画、素描类优美图片分享社区。专业为用户提供精美的灵感、插画、摄影、抓拍、小清新图片素材，是目前最广泛的图片收藏、分享社区。目标是为用户提供更好的使用体验与生活享受。" />
+    <meta name="keywords" content="优美图片分享 清新图片、微博头像，灵感图片、时尚图片、创意图片、图片设计、艺术图片、摄影照片、平面设计、精品图片、精美图片、唯美图片" /> 
+    <link rel="stylesheet" rev="stylesheet" href="/css/common.css" type="text/css" media="all" />  
+    <script type="text/javascript" src="/js/jquery.min.js"></script>   
+    <link href="/css/default.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/js/swfupload/swfupload.js"></script> 
+    <script type="text/javascript" src="/js/swfupload/swfupload.swfobject.js"></script>
+    <script type="text/javascript" src="/js/swfupload/swfupload.queue.js"></script>
+    <script type="text/javascript" src="/js/swfupload/fileprogress.js"></script>
+    <script type="text/javascript" src="/js/swfupload/handlers.js"></script>
+    <script type="text/javascript">
+        var swfu; 
+        SWFUpload.onload = function () {
+            var settings = {
+                flash_url : "/js/swfupload/swfupload.swf",
+                upload_url: "/upload/upload", //貌似怎么写都可以
+                post_params: { 
+                    "uid"  : "{=$userinfo.id=}",  
+					"album_id":$('#album').val(),
+				},
+                file_size_limit : "10 MB",
+                file_types : "*.jpg;*.gif;*.png;*.jpeg;",
+                file_types_description : "All Files",
+                file_upload_limit : 1000,
+                file_queue_limit : 0,
+                custom_settings : {
+                    progressTarget : "fsUploadProgress",
+                    cancelButtonId : "btnCancel"
+                },
+                debug: false,
+        
+                // Button Settings 
+                button_image_url : "/images/upload.png",
+                button_placeholder_id : "spanButtonPlaceholder",
+                button_width: 80,
+                button_height: 30,
+        
+                // The event handler functions are defined in handlers.js         
+                swfupload_loaded_handler : swfUploadLoaded,
+                file_queued_handler : fileQueued,
+                file_queue_error_handler : fileQueueError,
+                file_dialog_complete_handler : fileDialogComplete,
+                upload_start_handler : uploadStart,
+                upload_progress_handler : uploadProgress,
+                upload_error_handler : uploadError,
+                upload_success_handler : uploadSuccess,
+                upload_complete_handler : uploadComplete,
+                queue_complete_handler : queueComplete,
+                
+                // SWFObject settings
+                minimum_flash_version : "9.0.28",
+                swfupload_pre_load_handler : swfUploadPreLoad,
+                swfupload_load_failed_handler : swfUploadLoadFailed
+            };
+        
+            swfu = new SWFUpload(settings);
+        }     
+		$(document).ready(function(){	
+			$('#album').change(function(){
+				var album_id = $(this).children('option:selected').val(); 
+				//swfu.addPostParam("album_id",album_id);
+				swfu.setPostParams({"album_id":album_id});
+			});	
+		});
+	</script>
+</head>
+<body>
+    {=include file='include/menu.html'=} 
+    <div class="blank"></div>
+    <div class="main">  
+        <div class="left" style="height:auto;min-height:600px;_height:600px;"> 
+            <div style="border-bottom:1px solid #EEE;width:510px;margin:0 auto;padding-bottom:10px;margin-top:20px;text-align:left;">
+                <h2 style="font-family:Microsoft YaHei;color:#333;font-weight:bold;font-size:17px;">发布图片</h2>
+            </div>
+            <div style="border-bottom:1px solid #FFF;width:510px;margin:0 auto;padding-top:10px;padding-bottom:10px;margin-top:10px;text-align:left;"> 
+                <div style="margin-top:15px;">
+                     <form id="form1" action="index.php" method="post" enctype="multipart/form-data">                      
+                         <p style="margin-bottom:10px;">
+                            <input disabled="true" checked="true" style="margin-left:5px;border:none;" name="fav" type="checkbox">
+                            <span>上传后添加到我的图片收录</span>
+                         </p>
+                         <p style="margin-bottom:20px;">
+                            <input disabled="true" checked="true" name="title" style="margin-left:5px;border:none;" type="checkbox">
+                            <span>使用图片文件名作为图片标题</span>
+                         </p>
+						 <p style="margin-bottom:20px;">
+								选择相册:
+								<select id="album" name="album">
+									<option value="200">那些年逝去的青春</option>
+									<option value="100">极品美女</option>
+								</select>
+						 </p>  
+                         <div id="divSWFUploadUI">
+                             <div class="fieldset  flash" id="fsUploadProgress">
+                             <span class="legend">上传文件列表</span>
+                             </div>
+                             <p id="divStatus" style="margin-left:5px;margin-bottom:10px;">0 Files Uploaded</p>
+                             <p style="margin-left:5px;width:400px;">
+								 <span style="cursor:pointer;" id="spanButtonPlaceholder"></span>
+								 <input id="btnCancel" type="button" value="取消上传" disabled="disabled" style="display:none;margin-left: 2px;"/>  
+								 <span style="cursor:pointer;" class="btn_upload" onclick="swfu.startUpload();"></span>
+							</p>
+                         </div>
+                         <noscript>
+                             <div style="background-color: #FFFF66; margin: 10px 25px; padding: 10px 15px;">
+                                 We're sorry.  SWFUpload could not load.  You must have JavaScript enabled to enjoy SWFUpload.
+                             </div>
+                         </noscript>
+                         <div id="divLoadingContent" class="content" style="background-color: #FFFF66; margin: 10px 25px; display: none;">
+                             SWFUpload is loading. Please wait a moment...
+                         </div>
+                         <div id="divLongLoading" class="content" style="background-color: #FFFF66;  margin: 10px 25px;  display: none;">
+                             SWFUpload is taking a long time to load or the load has failed.  
+                         </div>
+                         <div id="divAlternateContent" class="content" style="background-color: #FFFF66;  margin: 10px 25px;  display: none;">
+                             We're sorry.  SWFUpload could not load.  You may need to install or upgrade Flash Player.
+                         </div>              
+                     </form>
+                 </div> 
+            </div>
+        </div>
+        <div class="right" >
+             {=include file='include/self.html'=} 
+             {=include file='include/push.html'=} 
+             {=include file='include/users.html'=}  
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {=include file='include/foot.html'=} 
+</body>                   
+</html>                          

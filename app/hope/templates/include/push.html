@@ -1,0 +1,10 @@
+{=if $likeList=}
+<div class="hearters">
+    <div style="width:233px;height:15px;margin:5px auto;">猜你喜欢</div>
+    {=foreach from=$likeList item=item=}
+    <li><a href="/item/{=$item.id=}"><img width=110 height=90 src="{=$item.face_url=}"></a></li>
+    {=/foreach=}
+    <div style="clear:both;"></div>  
+</div>
+{=/if=}
+

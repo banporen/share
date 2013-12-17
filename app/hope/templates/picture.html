@@ -1,0 +1,394 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+    <meta property="wb:webmaster" content="bfa312168408a5bc" /> 
+    <link href="/images/icon/favicon.ico" type="image/x-icon" rel="shortcut icon"> 
+    <title>{=$picture.userinfo.username=}分享的图片--OICU.ME 收录极品美女</title>	
+    <meta name="description" content="高品质灵感、清新、时尚、设计、插画、素描类优美图片分享社区。专业为用户提供精美的灵感、插画、摄影、抓拍、小清新图片素材，是目前最广泛的图片收藏、分享社区。目标是为用户提供更好的使用体验与生活享受。" />
+      <meta name="keywords" content="优美图片分享 清新图片、微博头像，灵感图片、时尚图片、创意图片、图片设计、艺术图片、摄影照片、平面设计、精品图片、精美图片、唯美图片" />
+    <link rel="stylesheet" rev="stylesheet" href="/css/common.css" type="text/css" media="all" />  
+    <script type="text/javascript" src="/js/jquery.min.js"></script>  
+    <link rel="stylesheet" href="/css/jquery.lightbox-0.5.css" type="text/css" media="all" /> 
+    <script src="/js/jquery.lightbox-0.5.pack.js" type="text/javascript"></script>     
+    <script language="javascript">
+         $(document).ready(function() { 
+              $("#edit").click(function(){
+                    $('#layer-mask').fadeIn();      
+              }); 
+              $("#close").click(function(){
+                    $('#layer-mask').fadeOut();
+              });
+              $("#cancel").click(function(){
+                    $('#layer-mask').fadeOut();
+              }); 
+              $('#confirm').click(function(){
+                    var text = $('#text-area').val();
+                    var pid = '{=$picture.id=}';
+                    $.ajax({
+                        type:'post',
+                        url:'/?s=item&a=up_desc&format=json',
+                        data:{pid:pid, text:text},
+                        success:function(data){
+                            if(data.status.code==0){
+                                $('#blk').hide();
+                                window.location.reload();   
+                            }else{
+                               alert('更新失败'); 
+                            }        
+                        }
+                    });  
+              });
+              $("#text-area").keydown(function(event){ 
+                    if(event.ctrlKey && event.which == 13){ 
+                         var text = $('#text-area').val();
+                         var pid = '{=$picture.id=}';
+                         $.ajax({
+                             type:'post',
+                             url:'/?s=item&a=up_desc&format=json',
+                             data:{pid:pid, text:text},
+                             success:function(data){
+                                 if(data.status.code==0){
+                                     $('#blk').hide();
+                                     window.location.reload();   
+                                 }else{
+                                    alert('更新失败'); 
+                                 }        
+                             }
+                         }); 
+                    }
+              });      
+         });
+    </script>
+</head>
+<body>
+    {=include file='include/menu.html'=} 
+    <div class="blank"></div> 
+    <div class="main">   
+        <div class="left"> 
+            <div class="mbox">
+                <div style="float:left;">
+                    <img title="{=$picture.userinfo.username=}" width=50 height=50 src="{=$picture.userinfo.avartar=}">
+                </div>
+                <div style="margin-left:10px;float:left;">
+                    <div style="margin-top:5px;">{=$picture.userinfo.username=}</div>
+                    <div style="margin-top:10px;">创建于 {=$picture.timePass=} &nbsp;&nbsp;<span  onclick="share(1);" style="color:#FF4F73;">分享到微博</span></div>
+                </div> 
+                <div id="heart" style="float:right;margin-right:20px;" onclick="collect('{=$picture.id=}', '{=$userinfo.id=}')" class="heart {=if $login=='Y'&&$picture.heart=}collected{=/if=}"></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="mbox">
+                <a id="item-tip" title="{=$picture.userinfo.username=}" href="{=$picture.original_url=}" rel="lightbox" >
+                    <img src="{=$picture.original_url=}">
+                </a>
+            </div> 
+            <div class="mbox">    
+                <p style="line-height:20px;text-align:left;text-indent:2em;">
+                {=if $picture.desc==''=}点击<span style="#FF5F83">编辑</span>可以给图片添加描述信息,你的每一个灵感和瞬间的想法都将会成为它永久的印记。{=else=}{=$picture.desc=}{=/if=}  <span id="edit" style="color:#0A8CD2">编辑</span>      
+                </p> 
+            </div>
+            
+            <div id="layer-mask">
+                <div style="font-size:13px;color:#666;margin:5px;">
+                        <span>添加描述信息</span>
+                        <span id="close" style="float:right;">x</span>
+                </div>
+                <div style="margin:10px 10px;">
+                        <textarea id="text-area" class="layer-text-area"></textarea>
+                </div>
+                <div style="margin:17px 10px;">
+                        <span id="confirm" class="layer-button">发布</span>
+                        <span id="cancel" class="layer-button grey">取消</span>     
+                </div>                
+            </div>
+
+            <div class="mbox" style="width:480px;">
+                <p>展开留言>></p> 
+            </div> 
+            <div class="mbox" style="width:480px;margin:0 auto;margin-top:-10px;">
+                <textarea id="textarea" style="width:425px;height:50px;float:left;margin-top:11px;" class="text-area"></textarea>  
+                <div style="float:right;height:auto;margin-top:12px;text-align:right;">
+                    <span id="comment" style="padding:16px 8px;" class="button share">留言</span>
+                </div>     
+                <div style="clear:both;"></div>
+            </div> 
+            <div class="mbox" id="comment_list" style="width:480px;">
+                {=foreach from=$commentList item=item=}
+                <div class="cmt-box">
+                      <div style="float:left;">
+                          <img title="{=$item.userinfo.username=}" width=32 height=32 src="{=$item.userinfo.avartar=}">
+                      </div>
+                      <div style="margin-left:10px;width:430px;float:left;">
+                          <div style="margin-top:-4px;line-height:20px;">
+                              <a href="/home/view/{=$item.userinfo.id=}"><span style="color:#0A8CD2">{=$item.userinfo.username=}</span></a>
+                              {=if $item.flag=}
+                                回复<a target="_blank" href="/home/view/{=$item.to_userinfo.id=}">@{=$item.to_userinfo.username=}</a>
+                              {=/if=}
+                              ：{=$item.content=} ({=$item.timePass=}) 
+                          </div>
+                          <div id="btn_{=$item.id=}" onclick="show(this, '{=$item.userinfo.username=}');" class="replytext">回复</div>
+                          <div id="reply_box_{=$item.id=}" class="reply">
+                                <input id="text_{=$item.id=}" type="text" style="width:400px;height:30px;" class="text-area">
+                                <div style="width:400px;margin-top:5px;text-align:right;">
+                                    <span class="button share" id="reply_{=$item.id=}" onclick="reply(this, '{=$item.from_uid=}');">回复</span>
+                                </div>
+                          </div>
+                      </div> 
+                      <div style="clear:both;"></div>
+                </div> 
+                {=/foreach=}  
+                 <div style="clear:both;"></div>
+            </div>
+        </div>
+        <div class="right" >
+             {=include file='include/self.html'=}  
+             <div class="hearters">{=$wb_user.screen_name=} <img src="{=$wb_user.profile_image_url=}"></div>
+             {=include file='include/push.html'=}
+             {=if $tags=}
+             <div class="hearters" >
+                 <ul class="tags-list">
+                     {=foreach from=$tags item=item=}
+                     <li><a href="">{=$item.name=}</a></li>
+                     {=/foreach=}
+                     <div style="clear:both;"></div>
+                 </ul>
+             </div>
+             {=/if=}
+             <div class="hearters">
+                 <div style="width:233px;height:15px;margin:5px auto;">添加标签,多个标签用英文半角逗号分隔</div>
+                 <div style="line-height:40px;">
+                    <div style="float:left;margin-top:10px;">
+                        <input id="tags-text" type="text" class="tags-text">
+                    </div>
+                    <div id="tags-add"  class="button share tags-add">添加</div>
+                    <div style="clear:both;"></div>
+                </div>
+             </div>
+             {=include file='include/users.html'=}  
+         </div>
+        <div style="clear:both;"></div>
+    </div>
+    {=include file='include/foot.html'=} 
+</body>                   
+</html>      
+<script type="text/javascript">
+         $(document).ready(function(){               
+               $('#tags-add').click(function(){
+                       var text = $('#tags-text').val();
+                       if(text.length>1){
+                            var pid = '{=$picture.id=}';
+                            $.ajax({
+                                type:'post',
+                                url:'/?s=tags&a=add&format=json',
+                                data:{pid:pid, text:text},
+                                success:function(data){
+                                     var obj = eval('('+data+')');
+                                     if(obj.code==0){
+                                        window.location.reload(); 
+                                     }
+                                }
+                            });
+                       }else{
+                            alert('标签不能为空');
+                       }
+                       //alert(pid);
+               });             
+               $('#item-tip').lightBox({  
+                      imageBlank:  '/images/lightbox-blank.gif',
+                      imageLoading: '/images/lightbox-ico-loading.gif',
+                      imageBtnClose: '/images/lightbox-btn-close.gif', 
+               });
+               $('#comment').click(function(){
+                       var login = '{=$login=}'; 
+                       if(login=='N'){
+                           window.location.href='/?s=userinfo&a=login'; 
+                       }
+                       if(login=='Y'){
+                              var text = $('#textarea').val();
+                              if(text.length<1){ 
+                                  $("#textarea").css({'background':'pink'}); 
+                                  setTimeout(warn, 300);
+                              }else{
+                                  var from_uid = '{=$userinfo.id=}';
+                                  var pid = '{=$picture.id=}';
+                                  var to_uid = '{=$picture.uid=}';
+                                  $.ajax({
+                                      type:'post',
+                                      url:'/?s=comment&a=doComment&format=json',
+                                      data:{from_uid:from_uid,to_uid:to_uid,pid:pid,text:text},
+                                      success:function(data){
+                                          if(data.status.code==0){
+                                              $("#textarea").val('');
+                                              addComment(data.data);
+                                          }else{
+                                              $("#textarea").css({'background':'pink'}); 
+                                              setTimeout(warn, 300);
+                                          } 
+                                      }        
+                                  });
+                              } 
+                        }
+                });
+         });
+         function addComment(data){
+                         var html = ''; 
+                         html += '<div class="cmt-box">';
+                         html +=    '<div style="float:left;">';
+                         html +=        '<img title="{=$userinfo.username=}" width=32 height=32 src="{=$userinfo.avartar=}">';
+                         html +=    '</div>';
+                         html +=    '<div style="margin-left:10px;width:430px;float:left;">';
+                         html +=        '<div style="margin-top:-4px;line-height:20px;">';
+                         html +=            '<span style="color:#0A8CD2">{=$userinfo.username=}</span>&nbsp;：'+ data.text +'&nbsp;&nbsp;(1秒钟之前)'; 
+                         html +=        '</div>';
+                         html +=        '<div  class="replytext">回复</div>'; 
+                         html +=    '</div>'; 
+                         html +=    '<div style="clear:both;"></div>';
+                         html += '</div>';
+                         $('#comment_list').prepend(html);
+         }
+         function warn(){
+             $("#textarea").css({'background':'#FFF'}); 
+         }
+         function share(type){   
+                var pid    = {=$picture.id=};   
+                var source = encodeURIComponent(location.href);//urlEncode，防止丢掉&后面的参数.        
+                $.ajax({         
+                    type:"post",         
+                    url:"/?s=item&a=trend",       
+                    data:{pid:pid},      
+                    success:function(result){        
+                            var obj = eval('(' + result + ')');//json字符串转换成对象        
+                            var picture =  'http://oicu.me'+obj.original_url;                      
+                            var username = obj.userinfo.username;
+                            if(type==1){
+                                window.open("http://service.weibo.com/share/share.php?url=" +source+ "&appkey=4215835456&title=我分享了一张图片&pic=" +
+				 picture +"&ralateUid=2542122931", "_blank", "width=615,height=505,resizable=no");
+                            }
+                             
+                    }   
+                });    
+         }  
+         function collect(pid, uid){
+                   if(uid){   
+                       $.ajax({
+                           type:'post',
+                           url:'/?s=item&a=collect&format=json',
+                           data:{pid:pid, uid:uid},
+                           success:function(data){
+                               if(data.status.code==0){
+                                    alert('收藏成功');
+                                   $("#heart").css({'background-position':'0px -38px'});
+                               }else{
+                                   alert('收藏失败!');    
+                               }
+                           }
+                       });
+                   }else{
+                       alert('登陆后才能收藏哦，亲');
+                       location.href= '/userinfo/login';
+                   }
+         }
+         
+         function  tags(id, pid, tid){ 
+                 $.ajax({
+                         type:'post',
+                         url:'/?s=item&a=addTags&format=json',
+                         data:{pid:pid, tid:tid},
+                         success:function(data){
+                             //alert(data);
+                             if(datastatus.code==0){
+                                 var count = $("#"+id).html();     
+                                 $("#"+id).html(parseInt(count)+1); 
+                             } 
+                         }
+                 });
+         }
+         function show(obj, username){
+                 var id_arr = obj.id.split('_');
+                 var id     = id_arr[1];
+                 var html   = '回复@' + username + ':'; 
+                 $("#reply_box_"+id).toggle(100);
+                 $("#text_"+id).val(html);
+	     }
+         function reply(obj, to_uid){
+                 var login = '{=$login=}'; 
+                 if(login=='N'){
+                      window.location.href='/userinfo/login'; 
+                 }else{
+                       var from_uid = '{=$userinfo.id=}'
+                       var id = obj.id;
+                       var id_arr = id.split('_'); 
+                       var replyText = $("#text_"+id_arr[1]).val();
+                       if(replyText.length<1){ 
+                           alert("亲，回复内容不能为空哦。"); 
+                       }else{ 
+                              var pid = '{=$picture.id=}';
+                              $.ajax({
+                                      type:'post',
+                                      url:'/?s=comment&a=reply&format=json',
+                                      data:{from_uid:from_uid, to_uid:to_uid, content:replyText, pid:pid},
+                                      success:function(data){
+                                              if(data.status.code==0){
+                                                      addReply(data.data);        
+                                              }
+                                              $("#text_"+id_arr[1]).parent().hide(); 
+                                      }
+                              });
+                       }
+                 } 
+         }
+         function addReply(data){
+               var html = ''; 
+               html += '<div class="cmt-box">';
+               html +=    '<div style="float:left;">';
+               html +=        '<img title="{=$userinfo.username=}" width=32 height=32 src="{=$userinfo.avartar=}">';
+               html +=    '</div>';
+               html +=    '<div style="margin-left:10px;width:430px;float:left;">';
+               html +=        '<div style="margin-top:-4px;line-height:20px;">';
+               html +=              '<a  href="" >{=$userinfo.username=}</a>&nbsp;回复<a target="_blank" href="/home/view/' + data.userinfo.id+'">@'+data.userinfo.username+'</a>：'+data.text+'&nbsp;&nbsp;(1秒钟前) ';
+               html +=        '</div>';
+               html +=        '<div  class="replytext">回复</div>'; 
+               html +=    '</div>'; 
+               html +=    '<div style="clear:both;"></div>';
+               html += '</div>';
+               $('#comment_list').prepend(html);
+               $("#reply_box_"+data.id).hide();
+         }
+         function good(pid, uid){
+                if(uid){
+                    $.ajax({
+                           type:'post',
+                           url:'/?s=item&a=good&format=json',
+                           data:{pid:pid},
+                           success:function(data){
+                               if(data.status.code==0){
+                                   var good = $("#good").html(); 
+                                   good = parseInt(good) + 1;
+                                   $("#good").html(good);
+                                   $('#vote_tip').animate({opacity: "show", top: "-20"}, "fast"); 
+                                   setTimeout(function(){
+                                        $('#vote_tip').animate({opacity: "hide", top: "0"}, "fast");
+                                   },800);
+                               }else{
+                                   alert('收藏失败!');    
+                               }
+                           }
+                       });
+                }else{
+                    alert('登陆后才能收藏哦，亲');
+                    location.href= '/userinfo/login';
+                }     
+         }
+         function deleteComment(id){
+                $.ajax({
+                    type:'post',
+                    url:'/?s=comment&a=deletes&format=json',
+                    data:{id:id},
+                    success:function(data){
+                           if(data.status.code==0){
+                                $("#comment_"+id).hide();
+                           }  
+                    }
+                });
+         } 
+</script>

@@ -1,0 +1,156 @@
+*{ margin:0; padding:0; }
+body{
+	background:#DEDEDE;
+	text-align:center;
+}
+a{text-decoration:none;}
+
+/****顶栏START****/
+.topbar{
+    height:50px; 
+    margin:0 auto;
+	z-index: 110; 
+    background:url(../../images/icon/top-nav.png) repeat-x fixed 0 0 #252525; 
+    box-shadow: 0 1px 10px rgba(0,0,0,0.4);   
+    border-bottom: 1px solid #FE8CAD;
+}
+.topbar-inner{
+    height:50px;    
+    margin:0 auto; 
+    text-align:left;
+    position:relative;
+    display:block;
+}
+.topbar-inner ul{
+    list-style:none;
+    text-align:left;
+    display:block;
+}
+.topbar-inner ul li{
+    display:block;
+    float:left; 
+    width:90px;
+    height:50px; 
+    line-height:40px;
+}
+.topbar-inner ul.index li:hover{
+    display:block;
+    float:left; 
+    width:90px;
+    height:50px; 
+    line-height:40px; 
+    background:#000; 
+}
+.black{
+    background:#000;
+}
+.topbar-inner ul li a{
+    font-family:"微软雅黑";
+    margin-left:10px;
+    display:block;        
+    font-size:13px;
+    color:#8C8C8C; 
+    cursor:pointer;
+}
+.topbar-inner ul li a .new-wrapper{ 
+    position: relative;
+    width:30px;
+    height:40px;
+    float:left;
+}
+.topbar-inner ul li a.home .new-wrapper .nav-home{
+   background: url("../../images/icon/global_icons.png") no-repeat scroll 0 -102px transparent; 
+   width:30px;
+   height:30px;
+}
+.nav-new {
+    display: block;
+    position: absolute;
+    top: 34px;
+    left: -1px;   
+    width:30px;
+    height: 3px;
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -200px -80px transparent; 
+}
+.topbar-inner ul li a .text{
+    width:40px;
+    height:40px;
+    float:left;
+    line-height:40px;
+    font-family: Arial,sans-serif; 
+    font-weight:bold;
+    font-size:18px;
+    color:#bbb;
+}
+.topbar-inner ul li a:hover .text{
+    color:#FFF;
+}
+
+.topbar-inner ul li a.people .new-wrapper .nav-people{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -80px -41px transparent;
+    width:30px;height:30px;
+    position: relative;
+}
+.topbar-inner ul li a.people:hover .new-wrapper .nav-people{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -80px -71px transparent;
+    width:30px;height:30px;
+    position: relative;
+}
+.topbar-inner ul li a.topics .new-wrapper .nav-topics{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -40px -41px transparent;
+    width:30px;height:30px;
+    position: relative;
+}
+.topbar-inner ul li a.topics:hover .new-wrapper .nav-topics{ 
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -40px -71px transparent;
+    width:30px;height:30px;
+    position: relative;
+}
+.topbar-inner ul li a.profile .new-wrapper .nav-profile{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -120px -41px transparent;
+    width:30px;
+    height:30px;
+    position: relative;
+}
+.topbar-inner ul li a.profile:hover .new-wrapper .nav-profile{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -120px -71px transparent;
+    width:30px;
+    height:30px;
+    float:left;
+    position: relative;
+}
+.topbar-inner ul li a.infoset .new-wrapper .nav-infoset{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -160px -41px transparent;
+    width:30px;
+    height:30px;
+    position: relative;
+}
+.topbar-inner ul li a.infoset:hover .new-wrapper .nav-infoset{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -160px -71px transparent;
+    width:30px;
+    height:30px;
+    position: relative;
+}
+.topbar-inner ul li a.publish .new-wrapper .nav-publish{
+    background: url("../../images/icon/global_icons.png") no-repeat scroll -200px -41px transparent;
+    width:30px;
+    height:30px;
+    position: relative;
+}
+
+li.topbar-divider {
+    float: left;
+    margin: 3px 10px;
+    background-position: -240px -50px;
+    width: 2px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: text-top;
+    background-image: url(../../images/icon/global_icons.png); 
+    background-repeat: no-repeat;
+    z-index:999999999;
+}
+
+/******顶栏end********/
+
+

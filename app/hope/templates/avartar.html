@@ -1,0 +1,155 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+    <meta property="wb:webmaster" content="bfa312168408a5bc" /> 
+    <link href="/images/icon/favicon.ico" type="image/x-icon" rel="shortcut icon"> 
+    <title>修改头像--初遇网</title>	
+    <meta name="description" content="高品质灵感、清新、时尚、设计、插画、素描类优美图片分享社区。专业为用户提供精美的灵感、插画、摄影、抓拍、小清新图片素材，是目前最广泛的图片收藏、分享社区。目标是为用户提供更好的使用体验与生活享受。" />
+      <meta name="keywords" content="优美图片分享 清新图片、微博头像，灵感图片、时尚图片、创意图片、图片设计、艺术图片、摄影照片、平面设计、精品图片、精美图片、唯美图片" />
+ 
+    <link rel="stylesheet" rev="stylesheet" href="/css/common.css" type="text/css" media="all" />  
+    <script type="text/javascript" src="/js/jquery.min.js"></script>  
+    <link href="/css/imgareaselect-default.css" type="text/css" rel="stylesheet">
+    <script src="/js/jquery.imgareaselect.pack.js" type="text/javascript"></script>     
+    <script type="text/javascript" src="/js/jquery.form.js"></script>
+
+          
+</head>
+<body>
+    {=include file='include/menu.html'=} 
+    <div class="blank"></div>
+    <div class="main">  
+        <div class="left" style="height:auto;min-height:600px;_height:600px;"> 
+            <div style="border-bottom:1px solid #EEE;width:510px;margin:0 auto;padding-bottom:10px;margin-top:20px;text-align:left;">
+                <h2 style="font-family:Microsoft YaHei;color:#333;font-weight:bold;font-size:17px;">修改头像</h2>
+            </div>
+            <div class="login-box">
+                <!--处理传图-->
+                <form method="post" id="upload_form" enctype="multipart/form-data" action="">
+                    <table><tbody>
+                        <tr>
+                            <td>当前头像:</td>  
+                            <td><img id="current_head" width=50 height=50 src="{=$userinfo.avartar=}"></td>
+                        </tr>
+                        <tr>
+                            <td>新头像:</td>
+                            <td>
+                                <input style="opacity:0;cursor:pointer;" size="30" id="file_name" name="Filedata" id="icon" type="file">
+                                <div style="cursor:pointer;margin-top:-25px;"><input type="button" class="sbtn" value=""></div>
+                            </td>
+                        </tr>  
+                    </tbody></table>
+                </form>
+                
+          </div> 
+          <div class="login-box" style="display:none;border:none;">
+                <img   id="crop" src="">       
+          </div>   
+          <div class="login-box" id="update" style="display:none;">
+                <form id="updateForm" action="" method="post">   
+                         <input type="hidden" name="uid" value="{=$userinfo.id=}">
+                         <input type="hidden" name="x1" value="" />
+                         <input type="hidden" name="y1" value="" />
+                         <input type="hidden" name="x2" value="" />
+                         <input type="hidden" name="y2" value="" />
+                         <input type="hidden" name="img" id="img" value=""/>
+                         <div style="float:right;"><input id="updateBtn" value="" name="commit"  class="savebtn" type="submit"></div> 
+                         <div style="clear:both;"></div>
+                </form>
+         </div> 
+         <div class="login-box" style="border:none;"><a target="_blank" href="http://mypictr.com/">使用 Mypictr 裁剪图片</a></div>
+         <div style="clear:both;"></div>        
+        </div>
+        <div class="right" >
+             {=include file='include/self.html'=} 
+             {=include file='include/push.html'=} 
+             {=include file='include/users.html'=} 
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="foot"></div>
+</body>                   
+</html>
+<script type="text/javascript">
+        $(document).ready(function(){  
+            //给文件上传input框绑定change事件
+            $('#file_name').bind('change',function(){
+                var path = $(this).val();////获取文件域中待上传的文件的本地路径
+                var ext  = path.substring(path.lastIndexOf('.'));////获取图片的扩展名
+                if(ext.toLowerCase() !='.jpg' && ext.toLowerCase() != '.png'){
+                    alert('抱歉,系统上传头像仅支持jpg或png格式');
+                    return false;
+                }        
+                if(path) {
+                    var options = {
+                        url       : "/?s=userinfo&a=doUpload",
+                        type      : 'POST',
+                        dataType  : 'json', 
+                        success   : preview
+                    };
+                    $('#upload_form').ajaxSubmit(options);
+                }
+            });
+            $("#updateBtn").click(function(){
+                    var option = {
+                        url       : "/?s=userinfo&a=updateAvartar",
+                        type      : 'POST',
+                        dataType  : 'json', 
+                        success   : processJson
+                    };
+                    $('#updateForm').submit(function() { 
+                        $(this).ajaxSubmit(option); 
+                        return false; 
+                    })
+            }); 
+        });
+        function processJson(data){
+                //alert(data.img);        
+                $("#current_head").attr("src", data.img); 
+        }
+        //上传完,渲染到页面上
+        function preview(data){
+            var url = data.img; 
+            $("#crop").attr("src", url); 
+            $("#img").attr("value", url); 
+            $("#crop").parent().show();
+            $("#crop").show(); 
+            $("#update").show();
+            $('<div><img src="'+url+'" style="position: relative;" /><div>')
+            .css({
+                float: 'right',
+                position: 'relative',
+                overflow: 'hidden',
+                width: '100px',
+                height: '100px'
+            })
+            .insertAfter($('#crop')); 
+            $('#crop').imgAreaSelect({ 
+                   x1: 0, y1: 0, x2: 180, y2: 180,
+                   minWidth:180,minHeight:180,maxWidth:180,maxHeight:180,
+                   selectionColor:'white',
+                   selectionOpacity:0.2,
+                   borderWidth:2,
+                   aspectRatio: '1:1',//选框的宽高比
+                   handles:true,
+                   onSelectEnd: function (img, selection){        
+                       $('input[name="x1"]').val(selection.x1);
+                       $('input[name="y1"]').val(selection.y1);
+                       $('input[name="x2"]').val(selection.x2);
+                       $('input[name="y2"]').val(selection.y2); 
+                   }, 
+                   onSelectChange: function(img, selection){
+                         var scaleX = 100 / (selection.width || 1);
+                         var scaleY = 100 / (selection.height || 1);
+
+                         $('#crop + div > img').css({
+                             width: Math.round(scaleX * data.width) + 'px',
+                             height: Math.round(scaleY * data.height) + 'px',
+                             marginLeft: '-' + Math.round(scaleX * selection.x1) + 'px',
+                             marginTop: '-' + Math.round(scaleY * selection.y1) + 'px'
+                         });
+                   }
+            });
+        }
+    </script>

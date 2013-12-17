@@ -1,0 +1,188 @@
+<!DOCTYPE>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />		
+    <meta property="wb:webmaster" content="bfa312168408a5bc" /> 
+    <link href="/images/icon/favicon.ico" type="image/x-icon" rel="shortcut icon"> 
+    <title>初见</title>	
+    <meta property="wb:webmaster" content="bfa312168408a5bc" />
+    <meta name="description" content="性感美女，人体艺术，极品美女，性感车模，人体艺术，明星写真。" />
+    <meta name="keywords" content=" 性感美女，人体艺术，极品美女，性感车模，人体艺术，明星写真。清新图片、微博头像，灵感图片、时尚图片、创意图片、图片设计、艺术图片、摄影照片、平面设计、精品图片、精美图片、唯美图片" /> 
+    <link rel="stylesheet" rev="stylesheet" href="/css/common.css" type="text/css" media="all" />  
+    <script type="text/javascript" src="/js/jquery.min.js"></script>      
+    <script type='text/javascript' src='/js/lavalamp.min.js'></script>
+	<script type="text/javascript">
+         $(document).ready(function(){ 
+                //首页图片的动态遮盖 
+                $(".item").hover(function(){
+                     $(this).children().first().show();
+                     $(this).children().last().show();
+                     $(this).children().first().stop(true,true).animate({height:"40px"}, 300);
+                     $(this).children().last().stop(true,true).animate({height:"35px"}, 300);
+                         
+                }, function() {
+                     $(this).children().first().stop(true,true).animate({height:"0px"}, 300);
+                     $(this).children().last().stop(true,true).animate({height:"0px"}, 300);          
+                });
+                var $backToTopEle = $('<div class="backToTop"></div>').appendTo($("body")).click(function() {
+                        $("html, body").animate({ scrollTop: 0 }, 920);
+                }), 
+                $backToTopFun = function() {
+                    var st = $(document).scrollTop(), winh = $(window).height();
+                    (st > 0)? $backToTopEle.show(): $backToTopEle.hide();
+                    if (!window.XMLHttpRequest) {
+                        $backToTopEle.css("top", st + winh - 166);
+                    }
+                };
+                $(window).bind("scroll", $backToTopFun);      
+                $backToTopFun();  
+        });        
+        function good(pid, uid){
+            if(uid){
+                var hid = "#heart_"+pid;   
+                $.ajax({
+                    type:'post',
+                    url:'/?s=item&a=collect',
+                    data:{pid:pid, uid:uid},
+                    success:function(data){
+                        if(data.result.status.code==0){
+                            $(hid).css({'background-position':'6px -33px'});
+                        }else{
+                            alert('收藏失败!');    
+                        }
+                    }
+                });
+            }else{
+                alert('登陆后才能收藏哦，亲');
+                location.href= '/userinfo/login';
+            }
+        }
+        function share(id){
+            var username = '{=$userinfo.username=}';
+            var source = encodeURIComponent(location.href);//urlEncode，防止丢掉&后面的参数.
+            $.ajax({
+                type:'post',
+                url:'/?s=public&a=trend',
+                data:{id:id},
+                success:function(data){
+                    var data = data.result.data;
+                    var pic = 'http://oicu.me' + data.original_url
+                    //alert(data.face_url);
+                    window.open("http://service.weibo.com/share/share.php?url=" +source+ "&appkey=3260142752&title=我分享了一张图片&pic=" +pic+ "&ralateUid=1718787660", "_blank", "width=615,height=505,resizable=no");
+                }
+            });
+        }
+</script>
+	<script type="text/javascript" src="/css/coin-slider.js"></script>
+	<link rel="stylesheet" href="/css/coin-slider-styles.css" type="text/css" />
+</head>
+<body>
+    {=include file='include/menu.html'=} 
+    <div class="blank"></div>
+    <div class="main"> 
+        <!--
+        <script type="text/javascript">
+			$(function() {$('ul#cat-menu').lavaLamp({fx: 'swing', speed: 333,startItem: 0});});
+		</script>
+		<div class="module-banner" style="background:#FFF;">
+            <div style="margin-top:16px;margin-left:5px;">
+				<ul id="cat-menu">
+						<li><a href="/">极品美女 | cute</a></li>
+						<li><a href="/">清新美女 | fashion</a></li>
+						<li><a href="/">丝袜诱惑 | fatancy</a></li>
+						<li><a href="/">高清车模 | model</a></li>
+						<li><a href="/">人体艺术 | art</a></li>
+						<li><a href="/">明星写真 | star</a></li>
+				</ul>		
+			</div>
+        </div>
+        -->
+		<div class="left"> 
+            <div class="mbox" style="font-size:14px;color:#666;margin-bottom:10px;">
+                <div style="width:200px;height:20px;float:left;">最新推荐图片</div>
+                <div class="top-text">     
+                    <a href="/">推荐</a><a class="color" href="/?t=hot">热门</a><a class="color" href="/?t=follow">关注</a>
+                </div>
+                <div style="clear:both;"></div>
+            </div>
+			{=if $page==1=}
+            <!--
+            <div id="games">
+					<a href="http://oicu.me/" target="_blank"><img src="http://oicu.me/images/slide/1.jpg" alt="" /></a>
+					<a href="http://oicu.me/" target="_blank"><img src="http://oicu.me/images/slide/2.jpg" alt="" /></a>
+					<a href="http://oicu.me/" target="_blank"><img src="http://oicu.me/images/slide/3.jpg" alt="" /></a>
+					<a href="http://oicu.me/" target="_blank"><img src="http://oicu.me/images/slide/4.jpg" alt="" /></a>
+				    <a href="http://oicu.me/" target="_blank"><img src="http://oicu.me/images/slide/5.jpg" alt="" /></a>	
+			 </div>
+			 <script type="text/javascript">
+				 $(document).ready(function() {
+						$('#games').coinslider({navigation: true,height:300, width: 600,delay: 2500 });
+					});
+            </script>
+            -->
+			{=/if=}	
+			{=foreach from=$pictureList item=item=}
+            <div class="item">
+                <div class="mask">
+                      <div style="float:left;width:30px;height:34px;margin-left:5px;margin-top:4px;">
+                          <a  href="/home/view/{=$item.userinfo.id=}" target="_blank">
+                              <img style="width:34px;height:34px;" src="{=$item.userinfo.avartar=}">
+                          </a>
+                      </div>
+                      <div style="float:left;margin-left:5px;width:150px;height:40px;">
+                          <div class="title"><a href="/home/view/{=$item.userinfo.id=}" target="_blank">{=$item.userinfo.username=}</a></div>
+                          <div class="desc"><a href="/home/view/{=$item.userinfo.id=}" target="_blank">{=$item.timePass=}</a></div>
+                      </div>
+                      <div class="hearts"><a id="heart_{=$item.id=}" class="heart {=if $login=='Y'&&$item.heart=}collects{=/if=}" {=if $item.heart==false=}onclick="good('{=$item.id=}', '{=$userinfo.id=}')"{=/if=}  href="javascript:;"></a></div>
+                      <div style="clear:both;"></div> 
+                 </div>
+                 <a href="/item/{=$item.id=}"><img width=245 src="{=$item.face_url=}"></a>
+                 <ul class="entry_tabs">
+                       <li class="view-hearts">
+                       <a title="围观数" tabindex="-1" href="/item/{=$item.id=}">
+                           <span>{=if $item.scan_count=}{=$item.scan_count=}{=else=}0{=/if=}</span><i>次围观</i>
+                       </a>
+                       </li>
+                       <li class="view-tags">
+                            <a title="评论" tabindex="-1" href="/item/{=$item.id=}">
+                                <span>{=if $item.comment_count=}{=$item.comment_count=}{=else=}0{=/if=}</span><i>评论</i>
+                            </a>
+                       </li> 
+                       <li class="view-share">
+                            <a title="分享" tabindex="-1" href="javascript:;" onclick="share('{=$item.id=}')"><i>分享</i></a>
+                       </li>
+                 </ul>
+            </div>
+            {=/foreach=} 
+            <div style="clear:both;"></div>
+            <div class="page-box">
+                  <table>             
+                      <tr>                    
+                          <td>{=$pageStr nofilter=}</td>                  
+                          <td>{=if $pageJump=}跳转到{=$pageJump nofilter=}{=/if=}</td>                
+                      </tr>           
+                  </table>      
+           </div>
+        </div>
+        <div class="right" >
+             {=include file='include/self.html'=} 
+             <div class="hearters">
+                <div style="margin-left:11px;line-height:40px;">
+                    {=if $wb_user=}
+                    <img src="{=$wb_user.profile_image_url=}"><span>{=$wb_user.screen_name=}</span>
+                    {=else=}
+                    或者<a style="font-weight:700;color:#FF4F73" href="{=$code_url=}">使用微博登陆</a>
+                    {=/if=}
+                </div>    
+            </div>
+             {=include file='include/hot.html'=} 
+             {=include file='include/tags.html'=}
+             {=include file='include/push.html'=}
+			 {=include file='include/users.html'=}  
+			 {=include file='include/new.html'=}			          
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    {=include file='include/foot.html'=} 
+</body>                   
+</html>
